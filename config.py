@@ -13,7 +13,13 @@ class DevelopmentConfig(Config):
 class ProductionConfig(Config):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")  # Uses Render's PostgreSQL
+    
+config = {
+    "development": DevelopmentConfig,
+    "production": ProductionConfig
+}
 
 # Select the config based on environment variable
 ENV = os.getenv("FLASK_ENV", "development")  # Default to development
 CurrentConfig = config.get(ENV, DevelopmentConfig)
+
