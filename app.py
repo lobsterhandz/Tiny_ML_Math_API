@@ -6,15 +6,11 @@ import os
 
 from database.models import db, MathOperation
 from ml.ml_model import TinyMLMath  # Import TinyMLMath model
-
+from config import CurrentConfig
 # Initialize Flask App
 app = Flask(__name__)
+app.config.from_object(CurrentConfig)
 tiny_ml = TinyMLMath()  # Load the ML model
-
-# Database Configuration (For PostgreSQL on Render)
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///math_operations.db")  # Fallback for local testing
-app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Initialize Database and Migrations
 db.init_app(app)
