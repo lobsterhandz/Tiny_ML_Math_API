@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.exceptions import HTTPException
 import os
-
+from flask_cors import CORS
 from database.models import db, MathOperation
 from ml.ml_model import TinyMLMath  # Import TinyMLMath model
 from config import CurrentConfig
