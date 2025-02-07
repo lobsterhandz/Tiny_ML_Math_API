@@ -16,6 +16,7 @@ tiny_ml = TinyMLMath()  # Load the ML model
 db.init_app(app)
 migrate = Migrate(app, db)
 
+CORS(app)  # Enable CORS for all routes
 
 # **💡 ROUTES - API ENDPOINTS** #
 
