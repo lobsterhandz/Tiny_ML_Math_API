@@ -1,71 +1,84 @@
-# WebSocket Chat App - CI/CD with GitHub Actions
+# 📌 TinyML Math API
 
-## Overview
-This project is a WebSocket-based chat application that allows users to join rooms, send messages, and interact in real time. To ensure the reliability of the project, we have implemented a CI/CD pipeline using GitHub Actions. The pipeline automates testing before merging changes into the main branch.
+## 🚀 Overview
+The **TinyML Math API** is a Flask-based RESTful API that performs basic mathematical operations and leverages a **TinyML model** for predictions. It is backed by a **PostgreSQL database** and is deployed using **Render** with CI/CD automation via **GitHub Actions**.
 
-## Features
-- **WebSocket Communication**: Real-time messaging using Flask-SocketIO.
-- **Chat Rooms**: Users can join different rooms and send messages.
-- **Text Effects & Emojis**: Users can format messages and use emojis.
-- **CI/CD Pipeline**: Automated testing and validation before deployment.
+## 🌍 Live API Deployment on RENDER
+🔗 **Live API:** [https://tiny-ml-math-api.onrender.com](https://tiny-ml-math-api.onrender.com)
 
-## Running the Project
-### **1. Installation**
-Ensure you have Python and dependencies installed:
+### **📌 Available API Endpoints**
+| **Method** | **Endpoint** | **Description** |
+|-----------|------------|----------------|
+| **GET** | `/` | Health check – returns `Math API is running!` |
+| **POST** | `/sum` | Perform addition (`{ "operand1": float, "operand2": float }`) |
+| **GET** | `/sum/all` | Retrieve all stored sums |
+| **GET** | `/sum/result/<int:target_result>` | Get sums filtered by result |
+| **GET** | `/predict_math?a=10&b=2&operation=2` | Use ML model to predict (0=Add, 1=Subtract, 2=Multiply, 3=Divide) |
+
+## 🛠️ Tech Stack
+- **Flask** – Python web framework  
+- **PostgreSQL** – Relational database  
+- **SQLAlchemy & Alembic** – ORM & Database migrations  
+- **TinyML** – Machine Learning model for math predictions  
+- **Gunicorn** – WSGI HTTP Server  
+- **Render** – Cloud deployment  
+- **GitHub Actions** – CI/CD pipeline  
+
+## 📂 Repository Structure
+```
+Tiny_ML_Math_API/
+│── app.py                  # Main application file
+│── config.py               # Configuration settings
+│── database/               # Database models
+│── migrations/             # Alembic migration files
+│── requirements/           # Dependencies
+│── tests/                  # Unit tests
+│── .github/workflows/      # CI/CD pipeline
+│── README.md               # Project documentation
+```
+
+## 📥 Installation & Setup
+### **1️⃣ Clone the Repository**
 ```sh
-pip install -r requirements.txt
+git clone https://github.com/lobsterhandz/Tiny_ML_Math_API.git
+cd Tiny_ML_Math_API
 ```
 
-### **2. Starting the WebSocket Server**
-Run the server:
+### **2️⃣ Create and Activate a Virtual Environment**
 ```sh
-python app.py
-```
-Access the chat at:
-```
-http://127.0.0.1:5000/
+python -m venv venv
+source venv/bin/activate  # macOS/Linux
+venv\Scripts\activate     # Windows
 ```
 
-### **3. Running Tests Locally**
-To verify the integrity of the helper functions, run:
+### **3️⃣ Install Dependencies**
 ```sh
-python -m unittest discover -s . -p "test_utils.py"
+pip install -r requirements/requirements.txt
 ```
 
-## CI/CD Pipeline (GitHub Actions)
-### **Workflow Process**
-- **Feature Branch (`feature/tests`)**: Runs automated tests before merging into `main`.
-- **Tests Included:**
-  - `sum_numbers()` (validates positive & negative sums)
-  - `is_palindrome()` (checks for palindromes)
-  - `factorial()` (ensures correct factorial calculation & raises errors on negatives)
-  - `is_even()` (checks if a number is even)
+### **4️⃣ Set Up the Database**
+```sh
+flask db upgrade
+```
 
-### **Workflow Configuration (`.github/workflows/main.yml`)**
-The CI/CD pipeline is triggered on:
-- **Push to `feature/tests` branch**
-- **Pull requests to `main` branch**
+### **5️⃣ Run the Flask Application**
+```sh
+flask run
+```
 
-### **Running Tests in CI/CD**
-1. GitHub automatically runs the tests when pushing changes to `feature/tests`.
-2. If all tests pass, the branch is safe to merge into `main`.
-3. If tests fail, the workflow prevents broken code from being deployed.
+## 🚀 Deployment Instructions
+### **🔹 Pushing Changes to GitHub**
+```sh
+git add .
+git commit -m "Updated API functionality"
+git push origin feature/tests  # Change the branch if needed
+```
 
-### **Deployment**
-Once merged into `main`, the application can be deployed manually or via automated deployment steps added to the pipeline.
+### **🔹 Deploying to Render**
+```sh
+curl -X POST "https://api.render.com/deploy/srv-XXXXX?key=YYYYYY"
+```
 
-## Contributing
-1. **Fork the repository**.
-2. **Create a feature branch** (`feature/new-feature`).
-3. **Commit and push changes**.
-4. **Create a pull request (PR)**.
-5. **Ensure tests pass before merging**.
-
-## Future Enhancements
-- **User Authentication**: Implement user accounts & authentication.
-- **Database Integration**: Store chat messages persistently.
-- **UI Improvements**: Enhance frontend UI with React.
-
-## License
-MIT License. Feel free to use and contribute!
+## 📌 GitHub Repository
+🔗 **GitHub Repo:** [Tiny_ML_Math_API](https://github.com/lobsterhandz/Tiny_ML_Math_API)
 
