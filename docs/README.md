@@ -82,3 +82,73 @@ curl -X POST "https://api.render.com/deploy/srv-XXXXX?key=YYYYYY"
 ## 📌 GitHub Repository
 🔗 **GitHub Repo:** [Tiny_ML_Math_API](https://github.com/lobsterhandz/Tiny_ML_Math_API)
 
+##📌 Demonstrating PostgreSQL Data Retrieval
+
+This API stores math operations in a PostgreSQL database hosted on Render. The following steps verify that data retrieval works correctly.
+
+##1️⃣ **Storing Data in PostgreSQL**
+
+To store an operation, send a request using the frontend:
+
+Visit the live demo: TinyML Math Webpage
+
+Input:
+
+Number 1: 5
+Number 2: 4
+Operation: Addition
+
+Click Calculate.
+
+The result 9 will be stored in PostgreSQL.
+
+
+
+---
+
+##2️⃣ Retrieving Data from PostgreSQL
+
+**Option 1: Web Browser (Simplest)**
+
+Open the API endpoint:
+👉 View Stored Data
+
+Expected JSON response:
+
+{
+  "operations": [
+    {
+      "id": 1,
+      "operand1": 5,
+      "operand2": 4,
+      "operation": "addition",
+      "result": 9
+    }
+  ]
+}
+
+This confirms that data retrieval is working.
+
+
+**Option 2: Postman (API Testing)**
+
+Make a GET request to:
+
+https://tiny-ml-math-api.onrender.com/sum/all
+
+View the JSON response.
+
+
+**Option 3: Terminal (cURL)**
+
+Run the following:
+
+curl -X GET "https://tiny-ml-math-api.onrender.com/sum/all" -H "Accept: application/json"
+
+
+---
+
+##📌 Notes
+
+✅ This API is fully integrated with PostgreSQL.
+✅ Data is stored and retrieved dynamically from the database.
